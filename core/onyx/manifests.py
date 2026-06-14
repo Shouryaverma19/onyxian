@@ -128,7 +128,7 @@ def _resolve_provided_files(
     return tuple(out)
 
 
-_ALLOWED_AGENT = {"name", "module", "description", "mission", "scope", "skills", "escalate_when", "disclaimer", "playbook"}
+_ALLOWED_AGENT = {"name", "module", "description", "mission", "scope", "skills", "escalate_when", "disclaimer", "playbook", "triggers"}
 
 
 def _check_scope_glob(pattern: str, *, where: str) -> None:
@@ -208,6 +208,7 @@ def _parse_agent(module_dir: Path, agent_id: str, module_name: str) -> AgentDef:
     playbook = data.get("playbook", "")
     if not isinstance(playbook, str):
         raise ManifestError(f"{agent_path}: 'playbook' must be a string")
+    triggers = _str_list(data.get("triggers"), where=f"{agent_path}: triggers")
     return AgentDef(
         name=agent_id,
         module=module_name,
@@ -219,6 +220,7 @@ def _parse_agent(module_dir: Path, agent_id: str, module_name: str) -> AgentDef:
         escalate_when=escalate,
         disclaimer=disclaimer.strip(),
         playbook=playbook.strip(),
+        triggers=triggers,
     )
 
 

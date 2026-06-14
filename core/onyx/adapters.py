@@ -66,11 +66,15 @@ class ResolvedAgent:
         self.escalations = [rt(item) for item in (*agent.escalate_when, *_STANDING_ESCALATIONS)]
         self.disclaimer = rt(agent.disclaimer) if agent.disclaimer else ""
         self.playbook = rt(agent.playbook) if agent.playbook else ""
+        self.triggers = [rt(t) for t in agent.triggers]
 
     def body_lines(self) -> list[str]:
-        lines = [
-            self.mission,
-            "",
+        lines = [self.mission, ""]
+        if self.triggers:
+            lines += ["## Reach for this agent when you hear", ""]
+            lines += [f'- "{t}"' for t in self.triggers]
+            lines += [""]
+        lines += [
             "## Operating rules",
             "",
             "Follow the vault-conventions skill for every note you create or edit. Least privilege governs you (Onyx charter §7.1): writing outside your write scope is a defect, not initiative.",

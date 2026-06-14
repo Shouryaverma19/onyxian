@@ -88,6 +88,27 @@ def test_playbook_renders_as_its_own_section(tmp_path):
     assert "Run `obsidian daily:read` over Demo-Stuff before writing." in text
 
 
+def test_triggers_render_as_a_section(tmp_path):
+    """An agent with `triggers` lists them under '## Reach for this agent when you hear'."""
+    root = tmp_path / "modules"
+    write_module(root, "core")
+    write_module(
+        root,
+        "demo",
+        variables=[
+            {"key": "root", "prompt": "Root", "default": "Demo-Stuff"},
+            {"key": "cadence", "prompt": "Cadence", "type": "choice", "options": ["weekly", "monthly"], "default": "weekly"},
+        ],
+        folders=["{{root}}/Output"],
+        agents={"demo-agent": agent_def(triggers=["log this", "we decided"])},
+    )
+    config = make_config({"demo": {"version": "0.1.0"}})
+    manifests = resolve_modules(config, discover_modules(root))
+    text = build_desired_state(config, manifests).file_by_path()[".claude/agents/demo-agent.md"].content.decode("utf-8")
+    assert "## Reach for this agent when you hear" in text
+    assert '- "log this"' in text
+
+
 def test_cross_module_scope_drops_when_module_disabled(library_root):
     config = make_config({"demo": {"version": "0.1.0"}})
     text = rendered_agent(library_root, config)

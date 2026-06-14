@@ -121,6 +121,7 @@ class AgentDef:
     escalate_when: tuple[str, ...] = ()
     disclaimer: str = ""
     playbook: str = ""
+    triggers: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
