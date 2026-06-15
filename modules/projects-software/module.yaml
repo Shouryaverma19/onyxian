@@ -1,5 +1,5 @@
 name: projects-software
-version: 0.2.0
+version: 0.2.1
 summary: >
   Per-project software engineering notes: a copy-per-project template subtree
   (overview, devlog, tasks, research), dated devlog entries, typed task and
@@ -27,7 +27,8 @@ provides:
 seeds:
   - "{{root}}/_Project-Template/00 Overview.md"
 post_install: |
-  Start a project by copying _Project-Template to a sibling folder named after
-  the project, then fill its Overview. Subsystem folders (renderer, runtime,
-  api, ...) are yours to add per project as the architecture demands; the
-  devlogs skill documents the rhythm.
+  Start a project with `onyx project new "<Name>"`: it scaffolds a sibling of
+  _Project-Template with the Devlog/Tasks/Research/Assets folders and a dated
+  Overview to fill in. Subsystem folders (renderer, runtime, api, ...) are
+  yours to add per project as the architecture demands; the devlogs skill
+  documents the rhythm.
