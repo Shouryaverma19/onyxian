@@ -21,15 +21,17 @@ If `obsidian` is not on PATH, it may still be installed — a terminal opened be
 
 This is the engine's §8 write contract, restated for commands that mutate a running vault:
 
-- **Additive by default.** Reach for `create` (a new file), `append`, `daily:append`, and `property:set`. Do not use `create ... overwrite`, `move`, `rename`, or `delete` on anything you did not create this run.
+- **Additive by default.** Reach for `create` (a new file), `append`, `daily:append`, and `property:set`. Do not use `create ... overwrite`, `move`, `rename`, or `delete` on anything you did not create this run — the lone exception is the heading insert below, on a note in your own scope.
 - **The user's notes are theirs.** Never reword, reformat, restructure, move, or delete a note the user wrote. You add to the vault; you do not edit the user's existing content out from under them.
 - **The engine owns structure; you own content.** Folders, modules, templates, and Bases come from `onyx apply`, not from an agent. Fill notes inside the structure that is already there; never invent folders or move the furniture.
 - **Respect managed files.** Files Onyx tracks in `.vault/lock.json` update themselves — do not hand-edit them through the CLI. Never touch `.vault/` at all.
 - **Look before you write, and stay idempotent.** Read the target first (`read`, `daily:read`, `file`). If what you would add is already there, stop — running a workflow twice must not double-write it.
 
-## The one sanctioned in-place edit
+## Two edits beyond plain additions
 
-Setting a note's own typed property is allowed: `obsidian property:set name=status value=<v> file="<note>"`. Where a status has two representations — a frontmatter `status` a Base reads, and a Tasks-plugin checkbox — the frontmatter is canonical: set it first, then update the checkbox, and if the second write fails, stop and report the split rather than leaving them inconsistent.
+**A typed property.** Setting a note's own typed property is allowed: `obsidian property:set name=status value=<v> file="<note>"`. Where a status has two representations — a frontmatter `status` a Base reads, and a Tasks-plugin checkbox — the frontmatter is canonical: set it first, then update the checkbox, and if the second write fails, stop and report the split rather than leaving them inconsistent.
+
+**A line under a heading.** There is no insert-under-heading command (`append`/`prepend` only reach a file's tail and head). To add a line under a specific heading — a decision under a project Overview's `## Key Decisions`, say — read the note, splice the line in after that heading, and write the whole note back with `create ... overwrite`. Only do this to a note in your own write scope that you maintain, keep every other line exactly as it was, and lean on Obsidian's file history if you get it wrong.
 
 ## Stay in your scope
 

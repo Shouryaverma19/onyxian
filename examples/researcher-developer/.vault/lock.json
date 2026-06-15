@@ -27,9 +27,9 @@
     },
     {
       "path": ".claude/agents/project-steward.md",
-      "sha256": "49744184c491ec66ec48c07f5a0e92381481b7265d18c9d056eb4f0eff43d2cb",
+      "sha256": "232e07f68a4fa0fafa070b529a03c8597d32fa4ac8c43269378c4776c9bc1dc7",
       "module": "projects-software",
-      "module_version": "0.2.1",
+      "module_version": "0.2.2",
       "kind": "managed",
       "location": "vault"
     },
@@ -77,7 +77,7 @@
       "path": ".claude/skills/devlogs/SKILL.md",
       "sha256": "167c37ea142fa4d271f092866a12b059fc3acaaf99b2874480610518b3f39a92",
       "module": "projects-software",
-      "module_version": "0.2.1",
+      "module_version": "0.2.2",
       "kind": "managed",
       "location": "vault"
     },
@@ -179,7 +179,7 @@
     },
     {
       "path": ".claude/skills/vault-operations/SKILL.md",
-      "sha256": "b234759204e6d489c3249b724c57723e9a0dd96437c97a07dd9257b16f32e322",
+      "sha256": "9efa1a3c9023dac0c1b66c40df6e3a1008539fb972e1d4c84d90c1ccc260d659",
       "module": "core",
       "module_version": "0.1.0",
       "kind": "managed",
@@ -203,7 +203,7 @@
     },
     {
       "path": ".vault/config.yaml",
-      "sha256": "b374f19b99ed28db3a9c6a18e56395ed65aa12a4b47c51a77d5a3eff6b8b99de",
+      "sha256": "e05c6aef264a8b0a7abd4c92e13671fcd1fcefc38d95407cf0e15f4cad67048a",
       "module": "core",
       "module_version": "0.1.0",
       "kind": "seeded",
@@ -341,7 +341,7 @@
       "path": "Projects/Software/Project-Tasks.base",
       "sha256": "1ebd757d850035365bb9d43430357ad16a300d3dcb2b07cc7294547e4963fe81",
       "module": "projects-software",
-      "module_version": "0.2.1",
+      "module_version": "0.2.2",
       "kind": "managed",
       "location": "vault"
     },
@@ -349,7 +349,7 @@
       "path": "Projects/Software/_Project-Template/00 Overview.md",
       "sha256": "60e3f36bfd577d48a0fac58ff73ea0a9f210ff4205658c1cf20d8e5523453746",
       "module": "projects-software",
-      "module_version": "0.2.1",
+      "module_version": "0.2.2",
       "kind": "seeded",
       "location": "vault"
     },
@@ -371,7 +371,7 @@
     },
     {
       "path": "Start-Here.md",
-      "sha256": "f20ab731b81faf6c687993e51001678c4af70684810da8ad58d35d29bfbc1a63",
+      "sha256": "e8a1915dd2457557ce9c64eda35cbe3d7bf269c886189343a266aa583c2879ee",
       "module": "core",
       "module_version": "0.1.0",
       "kind": "managed",
@@ -533,7 +533,7 @@
       "path": "Templates/Projects/Devlog Entry.md",
       "sha256": "2798bc39a8c76f0f5c59e46659d772690fd172fe65740c68c29300f59e72a04c",
       "module": "projects-software",
-      "module_version": "0.2.1",
+      "module_version": "0.2.2",
       "kind": "managed",
       "location": "vault"
     },
@@ -541,7 +541,7 @@
       "path": "Templates/Projects/Feature Note.md",
       "sha256": "4b4fbec93fd6c9cf45cc56c8b64c78ee3739c8e771aafa86439fefd28fd510b0",
       "module": "projects-software",
-      "module_version": "0.2.1",
+      "module_version": "0.2.2",
       "kind": "managed",
       "location": "vault"
     },
@@ -549,7 +549,7 @@
       "path": "Templates/Projects/Task Note.md",
       "sha256": "b290a42b607170d865c9fae92e62babcd633e7ac0191dd15b5429896a5ab85b6",
       "module": "projects-software",
-      "module_version": "0.2.1",
+      "module_version": "0.2.2",
       "kind": "managed",
       "location": "vault"
     },

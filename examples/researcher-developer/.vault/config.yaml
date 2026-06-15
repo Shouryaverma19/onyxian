@@ -2,7 +2,7 @@
 # This file is yours to edit; run `onyx plan` to preview the effect
 # and `onyx apply` to reconcile the vault to it.
 framework:
-  version: "1.0.10"
+  version: "1.0.11"
   runtimes: [claude-code]
 vault:
   name: "My Vault"
@@ -14,6 +14,6 @@ modules:
   daily-notes: { version: "0.1.0", vars: { root: "Daily-Notes", granularity: "YYYY/MM" } }
   fitness: { version: "0.1.0", vars: { root: "Fitness", review_cadence: "both" } }
   oss: { version: "0.1.0", vars: { root: "Projects/Software" } }
-  projects-software: { version: "0.2.1", vars: { root: "Projects/Software" } }
+  projects-software: { version: "0.2.2", vars: { root: "Projects/Software" } }
   reading: { version: "0.1.0", vars: { root: "Reading" } }
   research: { version: "0.1.0", vars: { root: "Academic/Research" } }
