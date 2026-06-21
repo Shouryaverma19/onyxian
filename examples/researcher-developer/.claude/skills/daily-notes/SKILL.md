@@ -31,7 +31,7 @@ If Templater is unavailable and macros stay literal, resolve the note from the t
 ## Working the day
 
 - New tasks land under `## Tasks` with Tasks-plugin metadata (due `📅`, scheduled `⏳`, created `➕`) so the queries pick them up.
-- Carry-over is query-driven, not copy-driven: unfinished tasks from previous days surface automatically — do not duplicate task lines forward by hand. Complete them where they live.
+- Carry-over is query-driven, not copy-driven: unfinished tasks from previous days surface automatically — do not duplicate task lines forward by hand, and do not read a past daily note directly to take stock of carry-over. The Carry-over query already surfaces every unfinished task in the tree, and `daily:read` only ever reads today's note anyway. Complete tasks where they live.
 - Frontmatter `status` is `open` for the current day; flip it to `closed` during the end-of-day review.
 
 ## End of day

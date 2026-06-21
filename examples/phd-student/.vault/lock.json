@@ -43,7 +43,7 @@
     },
     {
       "path": ".claude/skills/daily-notes/SKILL.md",
-      "sha256": "2d29cb8d798a70da0510eff3fdc28f8db4080e7719c5ddf6d004bd569ce4ccb7",
+      "sha256": "4379837dbde63b60249d19318039c6101cfe90584015fe4be0aba76c6366983a",
       "module": "daily-notes",
       "module_version": "0.2.1",
       "kind": "managed",
@@ -131,7 +131,7 @@
     },
     {
       "path": ".claude/skills/vault-operations/SKILL.md",
-      "sha256": "736ed148d3c8e7d1fb0dfe66f070630fe0ce8804a59e4f66b69884c1c23dc3e7",
+      "sha256": "32b0dc7b69469521a5d939c75b87ffaf872eb28e029ac62628caa0664f2f9856",
       "module": "core",
       "module_version": "0.1.1",
       "kind": "managed",
