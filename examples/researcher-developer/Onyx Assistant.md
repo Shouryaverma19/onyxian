@@ -16,8 +16,8 @@ Say e.g.: "build a study plan from this syllabus" · "what's due this week" · "
 Where its work lands: `Academic/Courses/*/Exam-Prep`, `Academic/Courses/*/Notes`
 
 ### daily-planner
-Creates and maintains daily notes — morning scaffold from the template, task triage and rollover, end-of-day review and journal close-out.
-Say e.g.: "plan my day" · "set up today's note" · "what's on today / triage my tasks" · "close out the day"
+Plans and maintains the day — runs the morning scaffold, gives a triage briefing that proposes (never silently makes) changes to your open and overdue tasks across the vault, and walks the end-of-day close-out.
+Say e.g.: "plan my day" · "what's on today / triage my tasks" · "close out the day"
 Where its work lands: `Daily-Notes`
 
 ### fitness-coach
@@ -55,7 +55,7 @@ Instruction packages in `.claude/skills/` the agents lean on. You never invoke t
 - **obsidian-templater** — Create dynamic templates using Templater's template syntax and tp.* functions. Use when the user mentions Templater, dynamic templates, tp.date, tp.file, template commands, or automated note creation.
 - **vault-operations** — How an agent safely operates a live Obsidian vault through the obsidian CLI — additive writes, least privilege, look-before-you-write, and when to escalate. Read this before running any obsidian command that changes the vault.
 - **exam-prep** — The academic module's working conventions — starting a course from the template subtree, chapter-note study tracking with the Exam-Study Base, and building study/spaced-repetition schedules from the syllabus and schedule notes. Use for any coursework, exam prep, or study-planning task.
-- **daily-notes** — How daily notes work in this vault — where today's note lives, how to create it, how task carry-over and the end-of-day close-out work. Use whenever creating, finding, or updating a daily note.
+- **daily-notes** — How daily notes work in this vault — where today's note lives, the safe morning-scaffold procedure for setting up today's note, how task carry-over works, and the end-of-day close-out. Use whenever setting up, creating, finding, or updating today's daily note.
 - **task-capture** — Capture a task from natural language into this Obsidian vault — parse the text, date, and priority; route it to the right note; format it for the Tasks plugin; and append it. Use whenever the user wants to add, capture, jot, or remember a task ("add a task to…", "remind me to…", "I need to fix X by Friday", "check this later").
 - **fitness-review** — The fitness system's working conventions — strategy-note-driven targets, the daily Intake tally, bodyweight tracking, and how weekly/monthly reviews are produced. Use when logging food or training, tracking weight, or writing a fitness review.
 - **oss-tracking** — The OSS tracking conventions — one note per project, the watching/contributing status lifecycles, the one-copy promote/demote rule, and last-checked staleness discipline. Use for any task touching the OSS watchlist or contributions.

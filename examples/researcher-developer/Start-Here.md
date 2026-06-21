@@ -10,9 +10,9 @@ Onyx manages this vault. The engine regenerates this note when your module set c
 
 ## Enabled modules
 
-- **core** 0.1.0 — The conventions every other module builds on: the Templates root, the vault home note, and the frontmatter and naming rules that humans and agents share.
+- **core** 0.1.1 — The conventions every other module builds on: the Templates root, the vault home note, and the frontmatter and naming rules that humans and agents share.
 - **academic** 0.2.0 — Course and exam management: a copy-per-course template subtree (overview, syllabus, schedule, lectures, assignments, exam prep with a study Base), plus a free-form additional-notes area for concepts and definitions.
-- **daily-notes** 0.2.0 — Daily planning notes under a date hierarchy: task queries that bake in the day (due, scheduled, overdue, carry-over), a notes/journal skeleton, and an end-of-day close-out — the hub the other domains hang their day off.
+- **daily-notes** 0.2.1 — Daily planning notes under a date hierarchy: task queries that bake in the day (due, scheduled, overdue, carry-over), a notes/journal skeleton, and an end-of-day close-out — the hub the other domains hang their day off.
 - **fitness** 0.2.0 — A complete personal fitness system: training plans and logs, nutrition driven by a user-owned Strategy note (never hardcoded targets), bodyweight and measurement tracking with Base views, health and knowledge notes, and weekly/monthly reviews.
 - **oss** 0.2.0 — Open-source tracking from watchlist to contribution: one frontmatter-driven note per project, disjoint status lifecycles for watching vs contributing, staleness-aware Base views, and a strict one-copy promote/demote rule.
 - **projects-software** 0.2.2 — Per-project software engineering notes: a copy-per-project template subtree (overview, devlog, tasks, research), dated devlog entries, typed task and feature notes with a status-driven Base, and subsystem notes that grow with the architecture.

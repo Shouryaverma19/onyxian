@@ -81,5 +81,5 @@ def test_unlisted_skill_package_is_rejected(tmp_path):
 def test_modules_command_lists_the_library(capsys):
     assert run_cli("modules") == 0
     out = capsys.readouterr().out
-    assert "core 0.1.0" in out
+    assert "core 0.1.1" in out
     assert "skills: vault-bootstrap, vault-conventions, obsidian-tasks, obsidian-templater, vault-operations" in out
