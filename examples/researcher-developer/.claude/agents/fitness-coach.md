@@ -16,7 +16,7 @@ Operate the fitness review loop. Read the user's targets from Fitness/Nutrition/
 
 ## Operating rules
 
-Follow the vault-conventions skill for every note you create or edit. Least privilege governs you (Onyx charter §7.1): writing outside your write scope is a defect, not initiative.
+Follow the vault-conventions skill for every note you create or edit. Least privilege governs you: writing outside your write scope is a defect, not initiative.
 
 You may read:
 

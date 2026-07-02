@@ -1,6 +1,6 @@
 # Core frontmatter schema
 
-This is the one source of truth for the typed-frontmatter conventions (KICKSTART.md §10.1). Humans read it here; the `vault-conventions` skill (M1) mirrors it for agents. The two must never diverge — change this file, regenerate the skill.
+This is the one source of truth for the typed-frontmatter conventions. Humans read it here; the `vault-conventions` skill mirrors it for agents. The two must never diverge — change this file, regenerate the skill.
 
 ## Scope
 

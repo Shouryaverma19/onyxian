@@ -111,7 +111,7 @@ def _install_sources_step(target: Path, config: Config, lock: Lock, library: dic
     except SourceInstallError as exc:
         print(f"warning: obsidian-skills install skipped: {exc}", file=sys.stderr)
         print(
-            "         the vault works fully without it; `onyx update` (M3) will install declared sources later.",
+            "         the vault works fully without it; `onyx update` will install declared sources later.",
             file=sys.stderr,
         )
         return
@@ -167,7 +167,7 @@ def cmd_init(args: argparse.Namespace) -> int:
             shown = ", ".join(offenders[:5]) + (", ..." if len(offenders) > 5 else "")
             raise VaultStateError(
                 f"init requires a new or empty folder, but {target} contains: {shown}. "
-                "Bringing an existing vault under management is `adopt`'s job (M1)."
+                "Bringing an existing vault under management is `adopt`'s job."
             )
 
     answers = load_answers(resolve_answers_spec(args.answers)) if args.answers else None
@@ -321,7 +321,7 @@ def cmd_adopt(args: argparse.Namespace) -> int:
     print(f"  + {CONFIG_REL} (seeded; yours to edit)")
     print("  + .vault/lock.json (the engine's ledger)")
     if scan.ambiguities:
-        print("checklist — decide these yourself; the engine will not (§9.3):")
+        print("checklist — decide these yourself; the engine will not:")
         for note in scan.ambiguities:
             print(f"  ? {note}")
     print("guarantee: adopt is additive only; nothing existing is moved, renamed, deleted, or overwritten.")
@@ -338,7 +338,7 @@ def cmd_adopt(args: argparse.Namespace) -> int:
             )
             return 1
     elif _is_interactive():
-        typed = input('mandatory review (§9.3): type "adopt" to apply exactly this plan: ').strip()
+        typed = input('mandatory review: type "adopt" to apply exactly this plan: ').strip()
         if typed != "adopt":
             print("aborted; nothing written.")
             return 1
@@ -565,7 +565,7 @@ def cmd_update(args: argparse.Namespace) -> int:
     print(render_plan(plan))
     conflicts = [a for a in plan.mutating if a.type == CONFLICT_NEW]
     if conflicts:
-        print("update report — new versions land BESIDE your customized files; no overwrites (§8.3):")
+        print("update report — new versions land BESIDE your customized files; no overwrites:")
         for action in conflicts:
             print(f"  ! {action.path} -> {action.write_path}")
     stale = [a for a in plan.reports if a.type == STALE]
@@ -638,7 +638,7 @@ def cmd_remove(args: argparse.Namespace) -> int:
     config = load_config(vault_root)
     mod_id = args.module
     if mod_id == "core":
-        raise ResolveError("'core' is required by everything and cannot be removed (§5.1)")
+        raise ResolveError("'core' is required by everything and cannot be removed")
     if mod_id not in config.modules:
         print(f"module {mod_id!r} is not enabled; nothing to do.")
         return 0
@@ -670,7 +670,7 @@ def cmd_remove(args: argparse.Namespace) -> int:
     desired = build_desired_state(config, manifests)
     module_dirs = {d.path for d in desired.dirs if d.module == mod_id}
 
-    print(f"removing module {mod_id!r} (§8.3: only unmodified framework-owned files are deleted):")
+    print(f"removing module {mod_id!r} (only unmodified framework-owned files are deleted):")
     if to_delete:
         print("  will delete:")
         for entry in to_delete:
@@ -776,8 +776,8 @@ provides:
     - "Templates/{title}/Example Note.md"
   # bases:   - "{{{{root}}}}/Overview.base"      # .base views over typed frontmatter (P5)
   # skills:  - my-skill                           # skills/<id>/SKILL.md
-  # agents:  - my-agent                           # agents/<id>.yaml (see §7.3)
-# seeds:     - "{{{{root}}}}/Start.md"            # written once, user-owned forever (§8.2)
+  # agents:  - my-agent                           # agents/<id>.yaml
+# seeds:     - "{{{{root}}}}/Start.md"            # written once, user-owned forever
 post_install: |
   One short paragraph for the human: what to fill in or read first.
 '''
@@ -908,14 +908,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.set_defaults(func=cmd_adopt)
 
-    p = sub.add_parser("update", help="upgrade module assets and pinned sources — §8.3: zero overwrites of modified files")
+    p = sub.add_parser("update", help="upgrade module assets and pinned sources — zero overwrites of modified files")
     p.add_argument("module", nargs="?", help="one module or source to update (default: everything)")
     p.add_argument("--vault", default=".", help="vault root (default: current directory)")
     p.add_argument("--yes", action="store_true", help="skip the confirmation prompt")
     p.add_argument("--dry-run", action="store_true", help="show the update plan and write nothing")
     p.set_defaults(func=cmd_update)
 
-    p = sub.add_parser("remove", help="disable a module — deletes only unmodified framework-owned files (§8.3)")
+    p = sub.add_parser("remove", help="disable a module — deletes only unmodified framework-owned files")
     p.add_argument("module", help="module id to remove")
     p.add_argument("--vault", default=".", help="vault root (default: current directory)")
     p.add_argument("--yes", action="store_true", help="skip the confirmation prompt")

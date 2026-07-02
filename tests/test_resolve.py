@@ -53,9 +53,9 @@ def test_conflicts_are_rejected(library):
         resolve_modules(config, library)
 
 
-def test_version_drift_is_loud_until_update_exists(library):
+def test_version_drift_is_loud(library):
     config = make_config({"demo": {"version": "0.0.9", "vars": {"required_thing": "x"}}})
-    with pytest.raises(ResolveError, match="version drift"):
+    with pytest.raises(ResolveError, match="run `onyx update` to move the pin forward"):
         resolve_modules(config, library)
 
 

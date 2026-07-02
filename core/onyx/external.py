@@ -85,7 +85,7 @@ def trust_warning(manifest: Manifest, repo: str, pin: str | None) -> str:
     )
     lines = [
         "=" * 72,
-        f"TRUST WARNING — external module {manifest.name!r} v{manifest.version} (KICKSTART.md §12)",
+        f"TRUST WARNING — external module {manifest.name!r} v{manifest.version}",
         f"  from: {repo}" + (f" @ {pin[:12]}" if pin else " (unpinned directory source)"),
         f"  provides: {counts}",
         "",

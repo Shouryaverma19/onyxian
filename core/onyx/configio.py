@@ -128,7 +128,7 @@ def parse_config(data: object, *, where: str = CONFIG_REL) -> Config:
             version=version, vars=dict(raw_vars), source=dict(source) if source else None
         )
     if "core" not in modules:
-        raise ConfigError("the 'core' module is required by everything and must be enabled (§5.1)")
+        raise ConfigError("the 'core' module is required by everything and must be enabled")
 
     sources = data.get("sources", {})
     if not isinstance(sources, dict):
@@ -152,7 +152,7 @@ def load_config(vault_root: Path) -> Config:
     if not path.is_file():
         raise ConfigError(
             f"{vault_root} is not an Onyx-managed vault ({CONFIG_REL} not found); "
-            "run `onyx init` on a new folder, or `onyx adopt` (M1) on an existing one"
+            "run `onyx init` on a new folder, or `onyx adopt` on an existing one"
         )
     data = load_yaml(path, what="vault config")
     return parse_config(data)
@@ -178,7 +178,7 @@ def module_line(mod_id: str, mod: ModuleConfig) -> str:
 def render_config_text(config: Config) -> str:
     """Deterministic config emitter; the only writer of `.vault/config.yaml`."""
     lines: list[str] = []
-    lines.append("# Onyx instance config — declares INTENT (KICKSTART.md §4.4).")
+    lines.append("# Onyx instance config — declares intent: which modules, with which variables.")
     lines.append("# This file is yours to edit; run `onyx plan` to preview the effect")
     lines.append("# and `onyx apply` to reconcile the vault to it.")
     lines.append("framework:")

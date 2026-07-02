@@ -1,6 +1,6 @@
 # Naming rules
 
-How names are formed in an Onyx vault (KICKSTART.md §10.2), and exactly when the engine transforms them.
+How names are formed in an Onyx vault, and exactly when the engine transforms them.
 
 ## Folder style
 
@@ -20,7 +20,7 @@ The style applies to **literal folder segments authored in module manifests** �
 - **Filenames** are never transformed; a template called `Note.md` stays `Note.md` under every style.
 - Files and folders the **user** creates are never renamed, restyled, or judged. The style only shapes what the engine itself creates.
 
-## Portable-path rules (§9.5)
+## Portable-path rules
 
 Every path the engine plans must work on macOS, Linux, and Windows alike, so manifests and variable values are validated against the strictest rules:
 

@@ -26,8 +26,8 @@ def resolve_modules(config: Config, library: dict[str, Manifest]) -> list[Manife
         if pinned != manifest.version:
             raise ResolveError(
                 f"module {mod_id!r} is pinned to {pinned} in config but the library ships "
-                f"{manifest.version}; version drift is handled by `update` (M3) — for now, "
-                f"align the config pin with the library"
+                f"{manifest.version}; run `onyx update` to move the pin forward, or "
+                f"align the config pin with the library by hand"
             )
 
     for mod_id in enabled:

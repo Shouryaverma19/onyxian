@@ -18,4 +18,4 @@ The numbered notes are **seeds**: the master copies belong to the user from day 
 
 ## What this module deliberately does not cover
 
-The research pipeline (paper PDFs, summaries, reading lists — `Academic/Research/` in the source vault) is the M3 `research` module; nesting it under the same root works via that module's own `root` variable. Per-topic subfolders under `Additional-Notes/` are the user's to grow.
+The research pipeline (paper PDFs, summaries, reading lists — `Academic/Research/` in the source vault) is the `research` module; nesting it under the same root works via that module's own `root` variable. Per-topic subfolders under `Additional-Notes/` are the user's to grow.

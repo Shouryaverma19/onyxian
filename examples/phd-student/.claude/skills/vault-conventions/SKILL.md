@@ -5,7 +5,7 @@ description: The frontmatter, naming, and writing rules any agent must follow wh
 
 # Vault conventions
 
-This skill mirrors `core/conventions/` from the Onyx repository — one source of truth, two audiences (KICKSTART.md §6.2). The bundled reference files carry the full rules:
+This skill mirrors `core/conventions/` from the Onyx repository — one source of truth, two audiences. The bundled reference files carry the full rules:
 
 - `frontmatter.md` — the typed-frontmatter schema every framework-created note follows.
 - `naming.md` — folder styles, what gets transformed when, and the portable-path rules.

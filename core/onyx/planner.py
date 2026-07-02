@@ -200,7 +200,7 @@ def build_plan(vault_root: Path, desired: DesiredState, lock: Lock, enabled_modu
                     path=entry.path,
                     module=entry.module,
                     kind=entry.kind,
-                    detail=f"module {entry.module!r} is no longer enabled; `remove` (M3) will clean this up",
+                    detail=f"module {entry.module!r} is no longer enabled; re-enable it in the config, then `onyx remove {entry.module}` cleans this up",
                 )
             )
         elif (
@@ -215,7 +215,7 @@ def build_plan(vault_root: Path, desired: DesiredState, lock: Lock, enabled_modu
                     path=entry.path,
                     module=entry.module,
                     kind=entry.kind,
-                    detail="tracked but no longer provided by its module; `update`/`remove` (M3) will handle it",
+                    detail="tracked but no longer provided by its module; `onyx update`/`onyx remove` will handle it",
                 )
             )
 

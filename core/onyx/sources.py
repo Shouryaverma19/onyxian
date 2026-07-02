@@ -143,7 +143,7 @@ def install_obsidian_skills(
                     skipped.append((path, "a file the engine does not own is already there"))
                     continue
             elif on_disk is not None and on_disk not in (entry.sha256, digest):
-                skipped.append((path, "you customized it; update (M3) will deliver new versions as *.new"))
+                skipped.append((path, "you customized it; `onyx update` will deliver new versions as *.new"))
                 continue
 
             if on_disk != digest:

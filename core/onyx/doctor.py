@@ -75,7 +75,7 @@ def run_doctor(vault_root: Path, modules_root: Path) -> list[Finding]:
     for entry in lock.sorted_entries():
         if entry.location == LOCATION_RUNTIME:
             findings.append(
-                Finding(INFO, f"runtime-installed entry {entry.path!r} not verified (arrives in M3)")
+                Finding(INFO, f"runtime-installed entry {entry.path!r} lives outside the vault; not verified")
             )
             continue
         native = to_native(vault_root, entry.path)
@@ -94,7 +94,7 @@ def run_doctor(vault_root: Path, modules_root: Path) -> list[Finding]:
             Finding(
                 WARN,
                 f"source-installed file(s) missing from disk: {', '.join(missing_src)}",
-                "`onyx update` (M3) reinstalls declared sources",
+                "`onyx update` reinstalls declared sources",
             )
         )
     if modified:
@@ -102,7 +102,7 @@ def run_doctor(vault_root: Path, modules_root: Path) -> list[Finding]:
             Finding(
                 INFO,
                 f"managed file(s) customized by you: {', '.join(modified)}",
-                "fine to keep; future updates will land beside them as *.new (§8.3)",
+                "fine to keep; future updates will land beside them as *.new",
             )
         )
 
@@ -131,7 +131,7 @@ def run_doctor(vault_root: Path, modules_root: Path) -> list[Finding]:
             )
         )
     if config.sources:
-        findings.append(Finding(INFO, "sources declared; pin reachability checks are network-bound and opt-in (M1)"))
+        findings.append(Finding(INFO, "sources declared; pin reachability is not checked (network-bound)"))
 
     return findings
 

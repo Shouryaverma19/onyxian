@@ -5,7 +5,7 @@ description: Interview wizard that sets up a new Onyx vault (init) or brings an 
 
 # vault-bootstrap — the interview wizard
 
-You are the conversational front end of a deterministic engine (KICKSTART.md §9.2). The division of labor is absolute: **you ask questions and drive the `onyx` CLI; the engine does every write.** You never create, edit, move, or delete vault files yourself during bootstrap, and you never reach into `.vault/`. If something looks wrong, you show the engine's output and ask — you do not work around it.
+You are the conversational front end of a deterministic engine. The division of labor is absolute: **you ask questions and drive the `onyx` CLI; the engine does every write.** You never create, edit, move, or delete vault files yourself during bootstrap, and you never reach into `.vault/`. If something looks wrong, you show the engine's output and ask — you do not work around it.
 
 ## Preconditions
 
@@ -15,7 +15,7 @@ You are the conversational front end of a deterministic engine (KICKSTART.md §9
    - `python -m pip install --user onyx-vault`  (on Windows, `py -m pip install --user onyx-vault` if `python` is not found)
    `uv` and `pipx` give an isolated install; `pip --user` is the fallback. Re-run `onyx --version` to confirm before continuing. If none of `uv`, `pipx`, or `pip` exist, tell the user to install one (uv is the lightest) and stop — never work around a missing engine by editing vault files yourself. A development checkout is the other valid source: `pip install -e .` from a clone, or set `ONYX_HOME` to one.
 2. `onyx modules` lists every available module with its variables and defaults — use it instead of guessing what exists.
-3. For **adopt**, tell the user to commit the vault to version control (or copy it) first. The engine is additive by contract, but the recommendation is part of the flow (§9.3).
+3. For **adopt**, tell the user to commit the vault to version control (or copy it) first. The engine is additive by contract, but the recommendation is part of the flow.
 
 ## The parity rule
 
@@ -45,7 +45,7 @@ Every question maps one-to-one onto a config key; the wizard, a hand-edited `.va
 1. Remind about the VCS commit, then run `onyx adopt <target> --dry-run`. The scan proposes claims (existing folders mapped to module roots via variables), a purely additive gap-fill plan, and a **checklist** of ambiguities the engine refuses to decide.
 2. Show claims, plan, and checklist verbatim. Walk the user through each claim (accept, or change the variable value) and each checklist item (these stay manual by design — never resolve one by acting on files).
 3. Adjusted claims are just module variable answers: rebuild the answers file and re-run the dry run until the user is satisfied.
-4. Adopt has **no `--yes`** (§9.3: mandatory review, no fast path). The dry run prints an acceptance token derived from the exact plan shown; apply with `onyx adopt <target> --answers <file> --accept <token>`. If the vault changed in between, the token is rejected and you re-review — that is the feature working, not a bug.
+4. Adopt has **no `--yes`** — mandatory review, no fast path. The dry run prints an acceptance token derived from the exact plan shown; apply with `onyx adopt <target> --answers <file> --accept <token>`. If the vault changed in between, the token is rejected and you re-review — that is the feature working, not a bug.
 5. Finish with `onyx doctor`, relay post-install notes, and summarize exactly what was added and what was left untouched.
 
 ## Hard rules

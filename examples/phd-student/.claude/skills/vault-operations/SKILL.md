@@ -19,7 +19,7 @@ If `obsidian` is not on PATH, it may still be installed — a terminal opened be
 
 ## The live write contract
 
-This is the engine's §8 write contract, restated for commands that mutate a running vault:
+This is the engine's write contract, restated for commands that mutate a running vault:
 
 - **Additive by default.** Reach for `create` (a new file), `append`, `daily:append`, and `property:set`. Do not use `create ... overwrite`, `move`, `rename`, or `delete` on anything you did not create this run — the lone exception is the heading insert below, on a note in your own scope.
 - **The user's notes are theirs.** Never reword, reformat, restructure, move, or delete a note the user wrote. You add to the vault; you do not edit the user's existing content out from under them.
@@ -36,7 +36,7 @@ This is the engine's §8 write contract, restated for commands that mutate a run
 
 ## Stay in your scope
 
-Your agent definition lists the globs you may read and write. Those bind your CLI calls too: a `create` or `append` outside your write scope is a defect, not initiative (Onyx charter §7.1). When a task needs a file outside your scope, escalate instead of reaching for it.
+Your agent definition lists the globs you may read and write. Those bind your CLI calls too: a `create` or `append` outside your write scope is a defect, not initiative. When a task needs a file outside your scope, escalate instead of reaching for it.
 
 ## Escalate instead of acting when
 
