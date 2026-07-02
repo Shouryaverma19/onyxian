@@ -10,9 +10,9 @@ release runbook.
 - **PyPI `onyxian`** — `pip install onyxian` / `pipx install onyxian` /
   `uvx onyxian`. The wheel bundles the whole module library under
   `onyxian/_library/` (see `pyproject.toml` `[tool.hatch.build.targets.wheel]`),
-  so an installed CLI finds its modules with no checkout. The import package and
-  the `onyxian` command keep their names; only the distribution name is `onyxian`
-  (`onyxian` was taken on PyPI).
+  so an installed CLI finds its modules with no checkout. Distribution name,
+  command, and import package are all `onyxian`. (Releases up to 1.0.14 shipped
+  as `onyx-vault` with an `onyx` command; 1.1.0 renamed everything.)
 - **Claude Code plugin** — installed straight from this repo with
   `/plugin marketplace add odysseia06/onyxian` then `/plugin install onyxian`. No PyPI
   step; the plugin's `vault-bootstrap` skill installs the CLI itself on first use.
