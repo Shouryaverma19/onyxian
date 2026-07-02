@@ -36,4 +36,8 @@ def test_demo_vault_is_researcher_developer_plus_overlay(tmp_path):
         "examples/demo drifted from researcher-developer + tools/demo_content; if the change is "
         "intended, run `python tools/gen_examples.py` and review the diff"
     )
-    assert run_cli("doctor", "--vault", str(demo)) == 0
+    # doctor runs on the freshly built copy: a git checkout of examples/demo lacks
+    # the engine-created EMPTY folders (git cannot store them), so doctor on the
+    # checkout reports pending dir-creates. The tree_hashes assertion above already
+    # proves the checkout's files are byte-identical to this copy's.
+    assert run_cli("doctor", "--vault", str(vault)) == 0
