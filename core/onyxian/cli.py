@@ -638,12 +638,13 @@ def cmd_remove(args: argparse.Namespace) -> int:
     vault_root = _vault_root(args)
     config = load_config(vault_root)
     mod_id = args.module
+    lock = _load_lock(vault_root)
     if mod_id == "core":
         raise ResolveError("'core' is required by everything and cannot be removed")
     if mod_id not in config.modules:
-        lock_entries = [e for e in load_lock(vault_root).sorted_entries() if e.module == mod_id]
+        lock_entries = [e for e in lock.sorted_entries() if e.module == mod_id]
     if mod_id not in config.modules and not lock_entries:
-        print(f"module {mod_idir} is not enabled; nothing to do.")
+        print(f"module {mod_id} is not enabled; nothing to do.")
         return 0
     library = discover_modules(default_modules_root(), vault_root)
     dependents = sorted(
@@ -652,10 +653,9 @@ def cmd_remove(args: argparse.Namespace) -> int:
     )
     if dependents:
         raise ResolveError(
-            f"cannot remove {mod_id!r}: {', '.join(dependents)} depend(s) on it; remove those first"
+            f"cannot remove {mod_id}: {', '.join(dependents)} depend(s) on it; remove those first"
         )
 
-    lock = load_lock(vault_root)
     entries = [e for e in lock.sorted_entries() if e.module == mod_id]
     to_delete, to_leave = [], []
     for entry in entries:
@@ -687,7 +687,7 @@ def cmd_remove(args: argparse.Namespace) -> int:
     if args.dry_run:
         print("dry run; nothing written.")
         return 0
-    if not _confirm(f"remove {mod_id!r}?", assume_yes=args.yes):
+    if not _confirm(f"remove {mod_id}?", assume_yes=args.yes):
         print("aborted; nothing written.")
         return 1
 
@@ -722,13 +722,13 @@ def cmd_remove(args: argparse.Namespace) -> int:
 
     config_text, new_config = remove_module_entry(read_text(config_path(vault_root)), mod_id)
     write_text_atomic(config_path(vault_root), config_text)
-    if config.modules[mod_id].source is not None:
-        shutil.rmtree(vault_root / ".vault" / "modules" / mod_id, ignore_errors=True)
-        print(f"  - removed the external copy at {EXTERNAL_REL}/{mod_id}")
-    print(
-        f"removed {mod_id!r}: {deleted} file(s) deleted, {len(to_leave)} left behind, "
-        f"{pruned} empty folder(s) pruned."
-    )
+    if mod_id in config.modules and config.modules[mod_id].source is not None:
+    shutil.rmtree(vault_root / ".vault" / "modules" / mod_id, ignore_errors=True)
+    print(f" - removed the external copy at {EXTERNAL_REL}/{mod_id}")
+print(
+    f"removed {mod_id}: {deleted} file(s) deleted, {len(to_leave)} left behind, "
+    f"{pruned} empty folder(s) pruned."
+)
 
     # The module set changed, so core's generated content (Start-Here.md) is stale.
     # Converge it here only if that is ALL that is pending; anything else stays the
