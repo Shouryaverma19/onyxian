@@ -158,15 +158,13 @@ def _prompt_text(question: str, default: str) -> str:
     raw = input(f"{question} [{default}]: ").strip()
     return raw or default
 
+
 def _prompt_choice(question: str, options: tuple[str, ...], default: str) -> str:
-    attempts = 0
-    while attempts < 3:
-        if attempts == 0:
-            print(question)
-            for i, option in enumerate(options, start=1):
-                marker = " (default)" if option == default else ""
-                print(f" {i}. {option}{marker}")
-                
+    print(question)
+    for i, option in enumerate(options, start=1):
+        marker = " (default)" if option == default else ""
+        print(f"  {i}. {option}{marker}")
+    for attempt in range(3):
         raw = input(f"choose 1-{len(options)} [{options.index(default) + 1}]: ").strip()
         if not raw:
             return default
@@ -177,13 +175,11 @@ def _prompt_choice(question: str, options: tuple[str, ...], default: str) -> str
         except ValueError:
             if raw in options:
                 return raw
-                
-        attempts += 1
-        if attempts < 3:
-            print(f"not a valid choice; enter a number or one of: {', '.join(options)}")
-            
-    print(f" unrecognized; using default {default!r}")
+        if attempt < 2:
+            print(f"  (not a valid choice; enter a number or one of: {', '.join(options)})")
+    print(f"  (unrecognized; using default {default!r})")
     return default
+
 
 def _prompt_variable(module: str, var: Variable, folder_style: str = "Title-Case-Hyphen") -> object:
     from .render import style_default

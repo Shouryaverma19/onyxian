@@ -638,13 +638,12 @@ def cmd_remove(args: argparse.Namespace) -> int:
     vault_root = _vault_root(args)
     config = load_config(vault_root)
     mod_id = args.module
-    lock = _load_lock(vault_root)
     if mod_id == "core":
         raise ResolveError("'core' is required by everything and cannot be removed")
-    if mod_id not in config.modules:
-        lock_entries = [e for e in lock.sorted_entries() if e.module == mod_id]
-    if mod_id not in config.modules and not lock_entries:
-        print(f"module {mod_id} is not enabled; nothing to do.")
+    lock = load_lock(vault_root)
+    entries = [e for e in lock.sorted_entries() if e.module == mod_id]
+    if mod_id not in config.modules and not entries:
+        print(f"module {mod_id!r} is not enabled; nothing to do.")
         return 0
     library = discover_modules(default_modules_root(), vault_root)
     dependents = sorted(
@@ -653,10 +652,9 @@ def cmd_remove(args: argparse.Namespace) -> int:
     )
     if dependents:
         raise ResolveError(
-            f"cannot remove {mod_id}: {', '.join(dependents)} depend(s) on it; remove those first"
+            f"cannot remove {mod_id!r}: {', '.join(dependents)} depend(s) on it; remove those first"
         )
 
-    entries = [e for e in lock.sorted_entries() if e.module == mod_id]
     to_delete, to_leave = [], []
     for entry in entries:
         native = to_native(vault_root, entry.path)
@@ -682,12 +680,13 @@ def cmd_remove(args: argparse.Namespace) -> int:
         print("  left behind:")
         for entry, reason in to_leave:
             print(f"    = {entry.path}  [{reason}]")
-    print(f"  ~ {CONFIG_REL} (dropping the {mod_id!r} entry)")
+    if mod_id in config.modules:
+        print(f"  ~ {CONFIG_REL} (dropping the {mod_id!r} entry)")
     print("  folders the module created are pruned only if empty; anything holding your files stays.")
     if args.dry_run:
         print("dry run; nothing written.")
         return 0
-    if not _confirm(f"remove {mod_id}?", assume_yes=args.yes):
+    if not _confirm(f"remove {mod_id!r}?", assume_yes=args.yes):
         print("aborted; nothing written.")
         return 1
 
@@ -720,15 +719,18 @@ def cmd_remove(args: argparse.Namespace) -> int:
         except OSError:
             continue  # this branch holds something; move on to the next candidate
 
-    config_text, new_config = remove_module_entry(read_text(config_path(vault_root)), mod_id)
-    write_text_atomic(config_path(vault_root), config_text)
-    if mod_id in config.modules and config.modules[mod_id].source is not None:
-    shutil.rmtree(vault_root / ".vault" / "modules" / mod_id, ignore_errors=True)
-    print(f" - removed the external copy at {EXTERNAL_REL}/{mod_id}")
-print(
-    f"removed {mod_id}: {deleted} file(s) deleted, {len(to_leave)} left behind, "
-    f"{pruned} empty folder(s) pruned."
-)
+    if mod_id in config.modules:
+        config_text, new_config = remove_module_entry(read_text(config_path(vault_root)), mod_id)
+        write_text_atomic(config_path(vault_root), config_text)
+        if config.modules[mod_id].source is not None:
+            shutil.rmtree(vault_root / ".vault" / "modules" / mod_id, ignore_errors=True)
+            print(f"  - removed the external copy at {EXTERNAL_REL}/{mod_id}")
+    else:
+        new_config = config  # orphan cleanup: the config never listed this module
+    print(
+        f"removed {mod_id!r}: {deleted} file(s) deleted, {len(to_leave)} left behind, "
+        f"{pruned} empty folder(s) pruned."
+    )
 
     # The module set changed, so core's generated content (Start-Here.md) is stale.
     # Converge it here only if that is ALL that is pending; anything else stays the
